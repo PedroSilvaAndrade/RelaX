@@ -90,3 +90,37 @@ Venda_Cliente = {
     302, 2
     303, 2
 }
+
+π nome, descricao, quantidade, Fornecedor.nome, Fornecedor.Cnpj (
+  τ quantidade DESC (
+    σ data ≥ DATE('2025-06-15') ∧ data ≤ DATE('2025-07-15') (
+      (Produto ⋈ Entrada) ⋈ Fornecedor
+    )
+  )
+)
+
+γ EXTRACT(MONTH FROM dataVenda)→mes, SUM(valorTotal)→faturamento (
+  σ EXTRACT(YEAR FROM dataVenda) = 2025 (Venda)
+)
+
+τ total_comprado DESC (
+  γ codCliente, nome, SUM(valorTotal)→total_comprado (
+    σ dataVenda ≥ DATE('2025-01-15') ∧ dataVenda ≤ DATE('2025-07-15') (
+      Cliente ⋈ Venda_Cliente ⋈ Venda
+    )
+  )
+)
+
+π nome, descricao, dataValidade, quantidade (
+  σ dataValidade ≥ CURRENT_DATE ∧ dataValidade ≤ DATE_ADD(CURRENT_DATE, INTERVAL 30 DAY) (
+    (Produto ⋈ Pertence_Lote_Produto) ⋈ Lote
+  )
+)
+
+τ total_vendido DESC (
+  γ codProduto, nome, SUM(quantidade)→total_vendido (
+    σ dataVenda ≥ DATE('2025-01-01') ∧ dataVenda ≤ DATE('2025-07-15') (
+      (Produto ⋈ Saida) ⋈ Saida_Venda ⋈ Venda
+    )
+  )
+)
