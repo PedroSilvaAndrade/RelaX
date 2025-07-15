@@ -1,0 +1,92 @@
+group: ex1
+
+Produto = {
+    codProduto:number, nome:string, unidade:string, descricao:string
+    1, "Ração Premium", "kg", "Ração para peixes"
+    2, "Filtro Externo", "und", "Filtro para aquário de 60L"
+    3, "Termômetro Digital", "und", "Com sensor externo"
+    4, "Aquário 100L", "und", "Aquário de vidro"
+    5, "Sal Marinho", "kg", "Sal sintético para aquário"
+    6, "Substrato Fino", "kg", "Substrato para plantas"
+}
+
+Fornecedor = {
+    Cnpj:string, nome:string
+    "12345678000199", "Pet Distribuidora"
+    "98765432000155", "Aquarismo LTDA"
+}
+
+Entrada = {
+    idEntrada:number, data:date, quantidade:number, valor:number, codProduto:number, Cnpj:string
+    101, 2025-07-01, 50, 20.00, 1, "12345678000199"
+    102, 2025-07-05, 10, 200.00, 2, "98765432000155"
+    103, 2025-06-25, 100, 8.50, 5, "12345678000199"
+    104, 2025-07-10, 15, 60.00, 3, "98765432000155"
+    105, 2025-06-15, 20, 15.00, 1, "12345678000199"
+}
+
+Lote = {
+    codLote:number, dataFabricacao:date, dataValidade:date, quantidade:number
+    500, 2025-05-01, 2025-08-01, 30
+    501, 2025-06-01, 2025-07-20, 50
+    502, 2025-04-10, 2025-07-25, 100
+}
+
+Pertence_Lote_Produto = {
+    codLote:number, codProduto:number
+    500, 1
+    501, 5
+    502, 3
+}
+
+Saida = {
+    idSaida:number, quantidade:number, valor:number, codProduto:number
+    201, 10, 25.00, 1
+    202, 2, 250.00, 2
+    203, 5, 10.00, 5
+    204, 1, 300.00, 4
+}
+
+Venda = {
+    numeroVenda:number, tipoPagamento:string, desconto:number, dataVenda:date, valorTotal:number, usoInterno:boolean
+    301, "pix", 0.00, 2025-07-05, 275.00, false
+    302, "cartao", 10.00, 2025-07-10, 540.00, false
+    303, "dinheiro", 5.00, 2025-01-20, 320.00, false
+}
+
+Saida_Venda = {
+    numeroVenda:number, idSaida:number
+    301, 201
+    301, 203
+    302, 202
+    302, 204
+}
+
+Cliente = {
+    codCliente:number, nome:string, email:string, tipo:string
+    1, "João Silva", "joao@email.com", "F"
+    2, "Pet Shop do Bairro", "contato@petshop.com", "J"
+}
+
+Telefone = {
+    idTelefone:number, codCliente:number, telefone:string
+    1, 1, "(11)91234-5678"
+    2, 2, "(11)99876-4321"
+}
+
+Fisica = {
+    codCliente:number, Cpf:string
+    1, "111.222.333-44"
+}
+
+Juridica = {
+    codCliente:number, Cnpj:string, razaoSocial:string
+    2, "22.333.444/0001-55", "Pet Shop do Bairro"
+}
+
+Venda_Cliente = {
+    numeroVenda:number, codCliente:number
+    301, 1
+    302, 2
+    303, 2
+}
